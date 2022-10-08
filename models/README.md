@@ -30,10 +30,10 @@ The CNN used is composed by:
 * 2 fully connected layer
 * 6 dropout layer: used to avoid overfitting
 * 4 batch normalization: used to normalize a batch of training data
-
-![image_ourCNN](./ourCNN.png)
-## FOTO ARCHITETTURA
-
+<center>
+   
+![image_ourCNN](./figures/ourCNN.png)
+</center>
 **Input**: Photo(s)
 
 **Output**: For each input image the model outputs, will classify the if the image shows a subject wearing glass. 
@@ -79,8 +79,10 @@ To improve the final accuracy of the model, a preprocessing has been done using 
     * Rotate the image such as the eyes lie is on horizontal line
     * Scale the image such that the size of the faces are approximately identical
 2. Sharpening filter: used to enhance the edges of objects and adjust the contrast and the shade characteristics
-
+<center>
+   
 ![image_pipeline](./figures/pipeline.PNG)
+</center>
 
 ## Evaluation Results
 
