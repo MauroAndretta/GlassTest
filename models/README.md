@@ -31,7 +31,7 @@ The CNN used is composed by:
 * 6 dropout layer: used to avoid overfitting
 * 4 batch normalization: used to normalize a batch of training data
 
-[comment]: <> (foto architettura)
+![image_ourCNN](./ourCNN.png)
 ## FOTO ARCHITETTURA
 
 **Input**: Photo(s)
