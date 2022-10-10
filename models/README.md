@@ -10,12 +10,11 @@ datasets:
 - CelebA face
 - UTK face
 organization: Glass Detection - Team
-
 ---
 
 # CNN for glass detection
 
-The model "GlassDect" developed by "Glass Detection - Team", has released the fist version on 15/06/22. It is based on the [paper](https://drive.google.com/file/d/1BDit7PxT2dFPRhPIzsDAj_fIiEDRnC77/view?usp=sharing), and its purpose is to detects and classify if a subject is wearing or not glass. The model's goal is exclusively to identify the presence of glass in a selfie image. It does not attempt to discover identities or demographics.
+The model "GlassDect" developed by "Glass Detection - Team", has released the first version on 15/06/22. It is based on this [paper](https://drive.google.com/file/d/1BDit7PxT2dFPRhPIzsDAj_fIiEDRnC77/view?usp=sharing), and its purpose is to detect and classify if a subject is wearing or not glass. The model's goal is exclusively to identify the presence of glass in a selfie image. It does not attempt to discover identities or demographics.
 
 On this page, you can learn more about how well the model performs on images with different characteristics and what kinds of images you should expect the model to perform well or poorly on.
 
@@ -30,22 +29,29 @@ The CNN used is composed by:
 * 2 fully connected layer
 * 6 dropout layer: used to avoid overfitting
 * 4 batch normalization: used to normalize a batch of training data
+
 <center>
-   
-![image_ourCNN](./figures/ourCNN.png)
+
+<img src="./figures/ourCNN.png" alt="image_ourCNN" width="200"/>
+
 </center>
+
+Since that we are using a CNN architecture, the number of trainable parameters depend on the dimension of the input images. For example, using as input images with a dimension of 223x223 the number of trainable parameters is 996,126. This number is lower than the number of trainable parameters required by others state of the art architectures, for example MobileNet. The low number of trainable parameters has been one of the main goals during the developement of the model, because it has been intended to be used as an auxiliary system.
+
 **Input**: Photo(s)
 
-**Output**: For each input image the model outputs, will classify the if the image shows a subject wearing glass. 
+**Output**: For each input image the model outputs, will classify if the image shows a subject wearing glass.
 
 No identity or demographic information is detected.
 
-## Intended uses
+## Intended Use
 
 The model was intended to be used to help biometric systems for facial authentication, because the presence of glass in an image could hamper the correct detection of faces due to disproportions, shadows or reflexes.
-So the main intent of the model is to notify to the user to remove glass if this item is detected before the biometric authentication.
+So the main intent of the model is to notify the user to remove glass if this item is detected before the biometric authentication.
 
 Note that this model is primarily aimed to be used on selfie images to make decisions about the presence of glass, but it can be used on all the kind of images.
+
+There are no restriction in the primary intended users.
 
 ## Limitations
 
@@ -57,16 +63,21 @@ The following factors may degrade the model’s performance:
 * Occlusion: Partially hidden or obstructed faces might not be detected
 * Blur: Blurry faces might not be detected
 
-![image_hardToClassify](./figures/hardToClassify.png)
+<center>
+
+<img src="./figures/hardToClassify.png" alt="image_hardToClassify" width="400"/>
+
+</center>
 
 ## Performance
 
-Here you can dig into the model's performance. As performance measure the accuracy has been chosen. The performance evaluation has been done in the fairest possible way, balancing the training set, validation set and training set with the 50% images with a subject that wears glass and 50% with a subject that not wears glass. This balancing  has been done using the data augmentation. The augmentation step has been applied only to the photos of the dataset with subject wearing glasses, in order to correctly balance the samples of the two classes. We correctly created our training and validation set, without considering photos already taken by the test set or their augmented version. The finally accuracy reached by the model using a number of example that is **25,000**, its equal to **93%**.
+Here you can dig into the model's performance. As performance measure the accuracy has been chosen. The performance evaluation has been done in the fairest possible way, balancing the training set, validation set and training set with the 50% of images with a subject that wears glass and 50% with a subject that not wears glass. This balancing  has been done using the offline data augmentation.
+
+The augmentation step has been applied only to the photos of the dataset with subject wearing glasses, in order to correctly balance the samples of the two classes. We correctly created our training and validation set, without considering photos already taken by the test set or their augmented version. The finally accuracy reached by the model using a number of example that is **25,000**, its equal to **93%**.
 
 ## Training data
 
-Considering the main task, the main dataset used for the training of the model is the [Selfie Dataset](../data/Selfie/README.md)
-
+Considering the main task, the main dataset used for the training of the model is **[Selfie Dataset](../data/Selfie/README.md)**
 
 ## Training Procedure
 
@@ -79,16 +90,18 @@ To improve the final accuracy of the model, a preprocessing has been done using 
     * Rotate the image such as the eyes lie is on horizontal line
     * Scale the image such that the size of the faces are approximately identical
 2. Sharpening filter: used to enhance the edges of objects and adjust the contrast and the shade characteristics
+
 <center>
-   
-![image_pipeline](./figures/pipeline.PNG)
+
+<img src="./figures/pipeline.PNG" alt="image_pipeline" width="600"/>
+
 </center>
 
 ## Evaluation Results
 
-To have more reliable results, the performance of the evaluation have been done using different datasets. To perform a test that was as fair as possible we selected 10.000 samples for each dataset using 80% for training, 10% for validation and 10% for test. Each set was balanced in the best possible way by having 50% of images with subjects with glasses and 50% of images with subjects without glasses. To reach these conditions we performed an offline data augmentation (flipped, rotation and bright-
-ness shifting) on the photos in which the subjects are wearing glasses, on each dataset.
-Below are specified the datasets used:
+The performance of the evaluation have been done using different datasets, to have more reliable results. We selected 10.000 samples for each dataset using 80% for training, 10% for validation and 10% for test to perform a test that was as fair as possible. Each set was balanced in the best possible way by having 50% of images with subjects with glass and 50% of images with subjects without glass. To reach these conditions we performed an offline data augmentation (flipped, rotation and brightness shifting) on the photos in which the subjects are wearing glass, on each dataset.
+
+Below are specified the others datasets used:
 
 * [Celeb Face Data Set](../data/CelebA/README.md)
 * [UTK Face](../data/UTK%20face/README.md)
@@ -100,11 +113,18 @@ Below are specified the datasets used:
 |  SELFIE |   0.862  |
 |  CELEBA |   0.987  |
 | UTKFACE |   0.993  |
+
 </center>
 
-Concerning the experimental phase, we decided to compare our CNN with two very famous state-of-the-art models: VGG-16 and MobileNet. 
-![image_stateOfTheArt](./figures/stateOfTheArtPerformance.png)
-We would have liked to include GlassNet in the comparison, but currently it is not possible to find the complete architecture. The choice of VGG is due to the fact that this CNN is one of the best performing in the state of the art: it is made up of about 46 million parameters, a number very similar to the parameters of the reference paper. The choice of MobileNet was taken for the similar characteristics compared to our model, as it has about 3 million parameters and this feature makes it suitable for working on mobile devices.
+Concerning the experimental phase, we decided to compare our CNN with two very famous state-of-the-art models: VGG-16 and MobileNet.
+
+<center>
+
+<img src="./figures/stateOfTheArtPerformance.png" alt="image_stateOfTheArt" width="400"/>
+
+</center>
+
+The choice of VGG is due to the fact that this CNN is one of the best performing in the state-of-the-art: it is made up of about 46 million parameters. The choice of MobileNet was taken for the similar characteristics compared to our model, as it has about 3 million parameters.
 
 Below are showed the performance results of all the models taken into account, with the three datasets:
 
@@ -125,8 +145,8 @@ Since we had very close accuracy results comparing our model and the models cons
 
 The following are specific ethical considerations:
 
-* **Data**: The model doesn't any sensitive data
-* **Human life**: The model is not intended to inform decisions about matters central to human life or flourishing 
+* **Data**: The model doesn't have any sensitive data
+* **Human life**: The model is not intended to inform decisions about matters central to human life
 * **Risks and harms**: If the model is used in a correct way, there are no risks in model usage
 * **Use cases**: There are not any known model use cases that are especially
 fraught
@@ -134,7 +154,7 @@ fraught
 ## Model Details
 
 ```bibtex
-@article{DBLP:journals/corr/abs-1810-04805,
+@article{Exam:SE4AI,
   author    = {Andrea Montemurro and
                Claudia Sgarra and
                Gaetano Dibenedetto and
