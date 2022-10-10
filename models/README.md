@@ -12,6 +12,8 @@ datasets:
 organization: Glass Detection - Team
 ---
 
+<style>body {text-align: justify}</style>
+
 # CNN for glass detection
 
 The model "GlassDect" developed by "Glass Detection - Team", has released the first version on 15/06/22. It is based on this [paper](https://drive.google.com/file/d/1BDit7PxT2dFPRhPIzsDAj_fIiEDRnC77/view?usp=sharing), and its purpose is to detect and classify if a subject is wearing or not glass. The model's goal is exclusively to identify the presence of glass in a selfie image. It does not attempt to discover identities or demographics.
@@ -36,7 +38,7 @@ The CNN used is composed by:
 
 </center>
 
-Since that we are using a CNN architecture, the number of trainable parameters depend on the dimension of the input images. For example, using as input images with a dimension of 223x223 the number of trainable parameters is 996,126. This number is lower than the number of trainable parameters required by others state of the art architectures, for example MobileNet. The low number of trainable parameters has been one of the main goals during the developement of the model, because it has been intended to be used as an auxiliary system.
+Since that we are using a CNN architecture, the number of trainable parameters depend on the size of the input images. For example, using as input images with a size of 223x223 the number of trainable parameters is 996,126. This number is lower than the number of trainable parameters required by others state of the art architectures, for example MobileNet. The low number of trainable parameters has been one of the main goals during the development of the model, because it has been intended to be used as an auxiliary system.
 
 **Input**: Photo(s)
 
@@ -73,7 +75,7 @@ The following factors may degrade the model’s performance:
 
 Here you can dig into the model's performance. As performance measure the accuracy has been chosen. The performance evaluation has been done in the fairest possible way, balancing the training set, validation set and training set with the 50% of images with a subject that wears glass and 50% with a subject that not wears glass. This balancing  has been done using the offline data augmentation.
 
-The augmentation step has been applied only to the photos of the dataset with subject wearing glasses, in order to correctly balance the samples of the two classes. We correctly created our training and validation set, without considering photos already taken by the test set or their augmented version. The finally accuracy reached by the model using a number of example that is **25,000**, its equal to **93%**.
+The augmentation step has been applied only to the photos of the dataset with subject wearing glass, in order to correctly balance the samples of the two classes. We correctly created our training and validation set, without considering photos already taken by the test set or their augmented version. The finally accuracy reached by the model using a number of example that is **25,000**, its equal to **93%**.
 
 ## Training data
 
