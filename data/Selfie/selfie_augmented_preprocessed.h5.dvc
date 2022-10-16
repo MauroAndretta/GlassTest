@@ -1,0 +1,4 @@
+outs:
+- md5: 3e93d1c3e3ebe633652335b64e464559
+  size: 3240413995
+  path: selfie_augmented_preprocessed.h5
