@@ -1,0 +1,4 @@
+[core]
+    remote = remote_datasets
+['remote "remote_datasets"']
+    url = gdrive://1MZT7XV4IYLvdFc9ZnKMZWkRNNTkP0Veg

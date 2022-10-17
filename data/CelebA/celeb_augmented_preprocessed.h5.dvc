@@ -1,0 +1,4 @@
+outs:
+- md5: 9e7f8a4761c383a840de2a4c6f9466eb
+  size: 1171170360
+  path: celeb_augmented_preprocessed.h5
